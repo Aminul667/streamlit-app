@@ -18,6 +18,7 @@ def bar_plot():
     plt.title("Event and View plot")
     st.pyplot(fig)
 
+
 def horizontal_bar_plot():
     fig = plt.figure(figsize=(12, 5))
     plt.xticks(rotation=80)
@@ -32,6 +33,18 @@ def horizontal_bar_plot():
     plt.title("Event and View plot")
     st.pyplot(fig)
 
+
+def scatter_plot():
+    fig = plt.figure(figsize=(10, 8))
+    plt.scatter(
+        x=df["comments"],
+        y=df["views"],
+        marker="*",
+        s=df["languages"],
+        c=df["languages"],
+        alpha=0.5
+    )
+    st.pyplot(fig)
 
 
 @st.cache_data
@@ -49,7 +62,8 @@ def main():
         [
             "Homepage",
             "Bar Plot",
-            "Horizontal Bar Plot"
+            "Horizontal Bar Plot",
+            "Scatter Plot"
         ]
     )
 
@@ -64,7 +78,9 @@ def main():
     elif page == "Bar Plot":
         bar_plot()
     elif page == "Horizontal Bar Plot":
-        horizontal_bar_plot();
+        horizontal_bar_plot()
+    elif page == "Scatter Plot":
+        scatter_plot()
 
 
 if __name__ == "__main__":
