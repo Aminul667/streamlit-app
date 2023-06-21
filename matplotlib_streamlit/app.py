@@ -22,7 +22,11 @@ def main():
     )
 
     if page == "Homepage":
-        st.header("Data Application")
+        # st.header("Data Application")
+        """
+        # Data Application
+        Dataset has been loaded
+        """
         st.balloons()
         st.write(df)
 
