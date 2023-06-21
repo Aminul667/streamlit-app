@@ -18,6 +18,21 @@ def bar_plot():
     plt.title("Event and View plot")
     st.pyplot(fig)
 
+def horizontal_bar_plot():
+    fig = plt.figure(figsize=(12, 5))
+    plt.xticks(rotation=80)
+    bar_data = df.sort_values(by="views", ascending=False)
+    bar_data = bar_data.head(20)
+    xaxis = "event"
+    yaxis = "views"
+    plt.ticklabel_format(style="plain")
+    plt.barh(bar_data[xaxis], bar_data[yaxis])
+    plt.xlabel("Event")
+    plt.ylabel("Views")
+    plt.title("Event and View plot")
+    st.pyplot(fig)
+
+
 
 @st.cache_data
 def load_data():
@@ -33,7 +48,8 @@ def main():
         "Select a Page",
         [
             "Homepage",
-            "Bar Plot"
+            "Bar Plot",
+            "Horizontal Bar Plot"
         ]
     )
 
@@ -47,6 +63,8 @@ def main():
         st.write(df)
     elif page == "Bar Plot":
         bar_plot()
+    elif page == "Horizontal Bar Plot":
+        horizontal_bar_plot();
 
 
 if __name__ == "__main__":
