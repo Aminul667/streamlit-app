@@ -52,6 +52,7 @@ def histogram():
     plt.hist(df["languages"], color="y", bins=50)
     st.pyplot(fig)
 
+
 def pie_chart():
     days_data = (
         df.groupby("published_day")["views"]
@@ -68,6 +69,20 @@ def pie_chart():
     st.pyplot(fig)
 
 
+def two_subplots():
+    fig = plt.figure(figsize=(15, 10))
+    plt.subplot(1, 2, 1)
+    bar_data = df.sort_values(by="views", ascending=False)
+    bar_data = bar_data.head(20)
+    xaxis = "event"
+    yaxis = "views"
+    plt.ticklabel_format(style="plain")
+    plt.barh(bar_data[xaxis], bar_data[yaxis])
+
+    plt.subplot(1, 2, 2)
+    plt.scatter(df["views"], df["comments"], c=df["languages"], marker="*")
+
+    st.pyplot(fig)
 
 
 @st.cache_data
@@ -88,7 +103,8 @@ def main():
             "Horizontal Bar Plot",
             "Scatter Plot",
             "Histogram",
-            "Pie Chart"
+            "Pie Chart",
+            "Two Subplots"
         ]
     )
 
@@ -112,6 +128,9 @@ def main():
     elif page == "Pie Chart":
         st.header("Views and Days pie chart")
         pie_chart()
+    elif page == "Two Subplots":
+        st.header("Subplots")
+        two_subplots()
 
 
 if __name__ == "__main__":
