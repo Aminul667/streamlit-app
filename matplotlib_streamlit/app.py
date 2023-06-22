@@ -52,6 +52,23 @@ def histogram():
     plt.hist(df["languages"], color="y", bins=50)
     st.pyplot(fig)
 
+def pie_chart():
+    days_data = (
+        df.groupby("published_day")["views"]
+        .sum()
+        .sort_values(ascending=False)
+        .reset_index()
+    )
+    fig = plt.figure(figsize=(10, 8))
+    plt.pie(
+        days_data["views"],
+        labels=days_data["published_day"],
+        autopct="%1.1f%%"
+    )
+    st.pyplot(fig)
+
+
+
 
 @st.cache_data
 def load_data():
@@ -70,7 +87,8 @@ def main():
             "Bar Plot",
             "Horizontal Bar Plot",
             "Scatter Plot",
-            "Histogram"
+            "Histogram",
+            "Pie Chart"
         ]
     )
 
@@ -91,6 +109,9 @@ def main():
     elif page == "Histogram":
         st.header("Language Histogram")
         histogram()
+    elif page == "Pie Chart":
+        st.header("Views and Days pie chart")
+        pie_chart()
 
 
 if __name__ == "__main__":
