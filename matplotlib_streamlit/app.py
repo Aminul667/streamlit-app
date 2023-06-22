@@ -47,6 +47,12 @@ def scatter_plot():
     st.pyplot(fig)
 
 
+def histogram():
+    fig = plt.figure(figsize=(12, 5))
+    plt.hist(df["languages"], color="y", bins=50)
+    st.pyplot(fig)
+
+
 @st.cache_data
 def load_data():
     df = pd.read_csv("./data/ted.csv")
@@ -63,7 +69,8 @@ def main():
             "Homepage",
             "Bar Plot",
             "Horizontal Bar Plot",
-            "Scatter Plot"
+            "Scatter Plot",
+            "Histogram"
         ]
     )
 
@@ -81,6 +88,9 @@ def main():
         horizontal_bar_plot()
     elif page == "Scatter Plot":
         scatter_plot()
+    elif page == "Histogram":
+        st.header("Language Histogram")
+        histogram()
 
 
 if __name__ == "__main__":
